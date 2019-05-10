@@ -1,0 +1,33 @@
+{
+  "name": "shodan-waf-bypass",
+  "version": "1.0.0",
+  "description": "Scan shodan for publicly accessible web servers",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/fijimunkii/shodan-waf-bypass.git"
+  },
+  "keywords": [
+    "waf",
+    "bypass",
+    "dns",
+    "ip",
+    "server",
+    "cloudflare"
+  ],
+  "author": "Harrison Powers",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/fijimunkii/shodan-waf-bypass/issues"
+  },
+  "homepage": "https://github.com/fijimunkii/shodan-waf-bypass#readme",
+  "dependencies": {
+    "bluebird": "^3.5.4",
+    "real-user-agent": "^1.0.4",
+    "request": "^2.88.0",
+    "shodan-client": "^3.1.4"
+  }
+}
