@@ -45,6 +45,9 @@ module.exports = async (options) => {
     .catch(() => { })));
 
   results = results.filter(d => d);
+  if (!results.length) {
+    throw 'No results';
+  }
 
   return results;
 };
