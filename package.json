@@ -1,6 +1,6 @@
 {
   "name": "shodan-waf-bypass",
-  "version": "1.0.2",
+  "version": "1.0.3",
   "description": "Scan shodan for publicly accessible web servers",
   "main": "index.js",
   "scripts": {
