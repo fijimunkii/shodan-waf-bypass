@@ -17,19 +17,21 @@ async function headers(host) {
   };
 };
 
-module.exports = (options) => {
+module.exports = async (options) => {
   options = options || {};
   if (!options.host) throw 'Missing host';
   if (!options.shodanKey) throw 'Missing shodan key';
   if (!options.testString) throw 'Missing test string';
-  return client
+
+  const ipaddresses = await client
     .search(`${options.host}${options.filters?' '+options.filters:''}`, options.shodanKey, searchOpts)
     .then(res => {
       return res.matches
         .filter(d => d.http && d.http.html && d.http.html.includes(options.testString))
         .map(d => d.ip_str);
-    })
-    .then(ips => Promise.all(ips.map(async ip => request.getAsync({
+    });
+
+  let results = await Promise.all(ipaddresses.map(async ip => request.getAsync({
       rejectUnauthorized: false,
       timeout: 1000,
       url: `https://${ip}${options.path||''}`,
@@ -40,6 +42,12 @@ module.exports = (options) => {
         return ip;
       }
     })
-    .catch(() => { }))))
-    .then(d => d.filter(d => d));
+    .catch(() => { })));
+
+  results = results.filter(d => d);
+  if (!results.length) {
+    throw 'No results';
+  }
+
+  return results;
 };
