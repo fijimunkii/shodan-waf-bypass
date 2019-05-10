@@ -32,6 +32,7 @@ module.exports = async (options) => {
     });
 
   let results = await Promise.all(ipaddresses.map(async ip => request.getAsync({
+      proxy: options.proxy,
       rejectUnauthorized: false,
       timeout: 1000,
       url: `https://${ip}${options.path||''}`,
